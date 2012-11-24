@@ -1,0 +1,63 @@
+{
+   "abstract" : "Test the spelling of HTML documents",
+   "author" : [
+      "Robert Rothenberg, C<< <rrwo at cpan.org> >>",
+      "Robert Rothenberg <rrwo@cpan.org>"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "Module::Install version 1.06, CPAN::Meta::Converter version 2.120921",
+   "license" : [
+      "artistic_2"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "Test-HTML-Spelling",
+   "no_index" : {
+      "directory" : [
+         "inc",
+         "t"
+      ]
+   },
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "ExtUtils::MakeMaker" : "6.59",
+            "Module::Install" : "0",
+            "Test::More" : "0"
+         }
+      },
+      "configure" : {
+         "requires" : {
+            "ExtUtils::MakeMaker" : "6.59",
+            "Module::Install" : "0"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Carp" : "0",
+            "HTML::Parser" : "0",
+            "List::Util" : "0",
+            "Moose" : "0",
+            "Scalar::Util" : "0",
+            "Search::Tokenizer" : "0",
+            "Test::Builder" : "0",
+            "Text::Aspell" : "0",
+            "curry" : "0",
+            "perl" : "5.01",
+            "self" : "0"
+         }
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "http://rt.cpan.org/NoAuth/Bugs.html?Dist=Test-HTML-Spelling"
+      },
+      "license" : [
+         "http://www.perlfoundation.org/artistic_license_2_0"
+      ]
+   },
+   "version" : "0.001000"
+}
