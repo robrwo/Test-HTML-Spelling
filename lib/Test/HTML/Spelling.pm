@@ -4,7 +4,32 @@ Test::HTML::Spelling - Test the spelling of HTML documents
 
 =head1 SYNOPSIS
 
+  use Test::More;
+  use Test::HTML::Spelling;
+
+  use Test::WWW::Mechanize;
+
+  use Lingua::StopWords;
+
+  my $sc = Test::HTML::Spelling->new(
+      stopwords      => Lingua::StopWords::getStopWords('en'),
+      ignore_classes => [qw( no-speling )],
+  );
+
+  $sc->speller->set_option('lang','en_GB');
+  $sc->speller->set_option('sug-mode','fast');
+
+  my $mech = Test::WWW::Mechanize->new();
+
+  $mech->get_ok('http://www.example.com/');
+
+  $sc->spelling_ok($mech->content, "spelling");
+
+  done_testing;
+
 =head1 DESCRIPTION
+
+TODO
 
 =cut
 
@@ -203,6 +228,15 @@ sub _text {
     }
 
 }
+
+=head2 spelling_ok
+
+    $sc->spelling_ok( $content, $message );
+
+Parses the HTML file and checks the spelling of the document text and
+selected attributes.
+
+=cut
 
 sub spelling_ok {
     my ($text, $message) = @args;
