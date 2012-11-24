@@ -46,7 +46,8 @@
             "Text::Aspell" : "0",
             "curry" : "0",
             "perl" : "5.01",
-            "self" : "0"
+            "self" : "0",
+            "version" : "0.77"
          }
       }
    },
@@ -57,7 +58,10 @@
       },
       "license" : [
          "http://www.perlfoundation.org/artistic_license_2_0"
-      ]
+      ],
+      "repository" : {
+         "url" : "git://github.com/robrwo/test-html-spelling.git"
+      }
    },
    "version" : "0.001000"
 }

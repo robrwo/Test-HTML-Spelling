@@ -38,6 +38,7 @@ requires (
     'self'		=> 0,
     'Test::Builder'	=> 0,
     'Text::Aspell'	=> 0,
+    'version'		=> 0.77,
 );
 
 install_as_cpan;
