@@ -68,6 +68,12 @@ has 'check_attributes' => (
     default	=> sub { [qw( title alt )] },
 );
 
+has 'empty_elements' => (
+    is		=> 'rw',
+    isa		=> 'HashRef',
+    default	=> sub { return { map { $_ => 1 } (qw( area base basefont br col frame hr img input isindex link meta param )) } },
+);
+
 has 'stopwords' => (
     is => 'rw',
     isa => 'HashRef',
@@ -158,6 +164,10 @@ sub _is_ignored_context {
 sub _push_context {
     my ($element, $ignore, $line) = @args;
 
+    if ($self->empty_elements->{$element}) {
+	return;
+    }
+
     unshift @{ $self->_context }, {
 	element => $element,
 	ignore  => $ignore || $self->_is_ignored_context,
@@ -168,8 +178,12 @@ sub _push_context {
 sub _pop_context {
     my ($element, $line) = @args;
 
+    if ($self->empty_elements->{$element}) {
+	return;
+    }
+
     my $context = shift @{ $self->_context };
-    if ((defined $element) && ($element ne $context->{element})) {
+    if ($element ne $context->{element}) {
 	croak sprintf("Expected element '%s' near input line %d", $context->{element}, $line // 0);
     }
 }
