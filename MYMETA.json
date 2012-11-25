@@ -36,7 +36,6 @@
       },
       "runtime" : {
          "requires" : {
-            "Carp" : "0",
             "HTML::Parser" : "0",
             "List::Util" : "0",
             "Moose" : "0",

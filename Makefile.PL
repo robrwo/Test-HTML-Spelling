@@ -28,7 +28,6 @@ build_requires (
 );
 
 requires (
-    'Carp'		=> 0,
     'curry'		=> 0,
     'HTML::Parser'	=> 0,
     'List::Util'	=> 0,

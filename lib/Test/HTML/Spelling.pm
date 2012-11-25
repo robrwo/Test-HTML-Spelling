@@ -49,7 +49,6 @@ use Moose;
 use curry;
 use self;
 
-use Carp;
 use HTML::Parser;
 use List::Util qw( reduce );
 use Scalar::Util qw( looks_like_number );
@@ -232,7 +231,7 @@ sub _pop_context {
 
     my $context = shift @{ $self->_context };
     if ($element ne $context->{element}) {
-	croak sprintf("Expected element '%s' near input line %d", $context->{element}, $line // 0);
+	$self->tester->croak(sprintf("Expected element '%s' near input line %d", $context->{element}, $line // 0));
     }
 }
 
