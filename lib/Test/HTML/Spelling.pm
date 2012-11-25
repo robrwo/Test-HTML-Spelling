@@ -12,8 +12,8 @@ Test::HTML::Spelling - Test the spelling of HTML documents
   use Lingua::StopWords;
 
   my $sc = Test::HTML::Spelling->new(
-      stopwords      => Lingua::StopWords::getStopWords('en'),
-      ignore_classes => [qw( no-speling )],
+      ignore_words   => Lingua::StopWords::getStopWords('en'),
+      ignore_classes => [qw( no-spellcheck )],
   );
 
   $sc->speller->set_option('lang','en_GB');
@@ -29,7 +29,16 @@ Test::HTML::Spelling - Test the spelling of HTML documents
 
 =head1 DESCRIPTION
 
-TODO
+This module parses an HTML document, and checks the spelling of the
+text and some attributes (such as the C<title> and C<alt> attributes).
+
+It will not spellcheck the attributes or contents of elements
+(including the contents of child elements) with the class
+C<no-spellcheck>.  For example, elements that contain user input, or
+placenames that are unlikely to be in a dictionary (such as timezones)
+should be in this class.
+
+It will fail when an HTML document if not well-formed.
 
 =cut
 
@@ -56,11 +65,29 @@ use version 0.77; our $VERSION = version->declare('v0.1.0');
 
 =cut
 
+=head2 ignore_classes
+
+This is an accessor method for the names of element classes that will
+not be spellchecked.  It is also a constructor paramater.
+
+It defaults to C<no-spellcheck>.
+
+=cut
+
 has 'ignore_classes' => (
     is		=> 'rw',
     isa		=> 'ArrayRef[Str]',
     default	=> sub { [qw( no-spellcheck )] },
 );
+
+=head2 check_attributes
+
+This is an accessor method for the names of element attributes that
+will be spellchecked.  It is also a constructor paramater.
+
+It defaults to C<title> and C<alt>.
+
+=cut
 
 has 'check_attributes' => (
     is		=> 'rw',
@@ -68,13 +95,27 @@ has 'check_attributes' => (
     default	=> sub { [qw( title alt )] },
 );
 
-has 'empty_elements' => (
+has '_empty_elements' => (
     is		=> 'rw',
     isa		=> 'HashRef',
     default	=> sub { return { map { $_ => 1 } (qw( area base basefont br col frame hr img input isindex link meta param )) } },
 );
 
-has 'stopwords' => (
+=head2 ignore_words
+
+This is an accessor method for setting a hash of words that will be
+ignored by the spellchecker.  Use it to specify a custom dictionary,
+e.g.
+
+  use File::Slurp;
+
+  my %dict = map { chomp($_); $_ => 1 } read_file('custom');
+
+  $sc->ignore_words( \%dict );
+
+=cut
+
+has 'ignore_words' => (
     is => 'rw',
     isa => 'HashRef',
     default => sub { { } },
@@ -97,7 +138,7 @@ has 'tokenizer' => (
 
 	    regex	=> qr/\p{Word}+(?:[-'.]\p{Word}+)*/,
 	    lower	=> 0,
-	    stopwords	=> $self->stopwords,
+	    stopwords	=> $self->ignore_words,
 
 	);
 
@@ -125,6 +166,15 @@ has 'parser' => (
 
     },
 );
+
+=head2 speller
+
+  $sc->speller->set_option('lang','en_GB');
+
+This is an accessor that gives you access to the L<Text::Aspell>
+object.  Use this to configure the spellchecker.
+
+=cut
 
 has 'speller' => (
     is => 'ro',
@@ -164,7 +214,7 @@ sub _is_ignored_context {
 sub _push_context {
     my ($element, $ignore, $line) = @args;
 
-    if ($self->empty_elements->{$element}) {
+    if ($self->_empty_elements->{$element}) {
 	return;
     }
 
@@ -178,7 +228,7 @@ sub _push_context {
 sub _pop_context {
     my ($element, $line) = @args;
 
-    if ($self->empty_elements->{$element}) {
+    if ($self->_empty_elements->{$element}) {
 	return;
     }
 
