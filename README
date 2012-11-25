@@ -7,11 +7,9 @@ SYNOPSIS
 
       use Test::WWW::Mechanize;
 
-      use Lingua::StopWords;
-
       my $sc = Test::HTML::Spelling->new(
-          stopwords      => Lingua::StopWords::getStopWords('en'),
-          ignore_classes => [qw( no-speling )],
+          ignore_classes   => [qw( no-spellcheck )],
+          check_attributes => [qw( title alt )],
       );
 
       $sc->speller->set_option('lang','en_GB');
@@ -26,9 +24,46 @@ SYNOPSIS
       done_testing;
 
 DESCRIPTION
-    TODO
+    This module parses an HTML document, and checks the spelling of the text
+    and some attributes (such as the `title' and `alt' attributes).
+
+    It will not spellcheck the attributes or contents of elements (including
+    the contents of child elements) with the class `no-spellcheck'. For
+    example, elements that contain user input, or placenames that are
+    unlikely to be in a dictionary (such as timezones) should be in this
+    class.
+
+    It will fail when an HTML document if not well-formed.
 
 METHODS
+  ignore_classes
+    This is an accessor method for the names of element classes that will
+    not be spellchecked. It is also a constructor paramater.
+
+    It defaults to `no-spellcheck'.
+
+  check_attributes
+    This is an accessor method for the names of element attributes that will
+    be spellchecked. It is also a constructor paramater.
+
+    It defaults to `title' and `alt'.
+
+  ignore_words
+    This is an accessor method for setting a hash of words that will be
+    ignored by the spellchecker. Use it to specify a custom dictionary, e.g.
+
+      use File::Slurp;
+
+      my %dict = map { chomp($_); $_ => 1 } read_file('custom');
+
+      $sc->ignore_words( \%dict );
+
+  speller
+      $sc->speller->set_option('lang','en_GB');
+
+    This is an accessor that gives you access to the Text::Aspell object.
+    Use this to configure the spellchecker.
+
   spelling_ok
         $sc->spelling_ok( $content, $message );
 
