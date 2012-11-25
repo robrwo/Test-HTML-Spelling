@@ -237,6 +237,8 @@ sub _pop_context {
 }
 
 sub _start_document {
+    $self->_context([]);
+    $self->_errors(0);
 
 }
 
@@ -306,6 +308,13 @@ sub spelling_ok {
     $self->_errors(0);
     $self->parser->parse($text);
     $self->parser->eof;
+
+    if ($self->_errors) {
+	$self->tester->diag(
+	    sprintf("Found %d spelling %s",
+		    $self->_errors,
+		    ($self->_errors == 1) ? "error" : "errors"));
+    }
 
     $self->tester->ok($self->_errors == 0, $message);
 
