@@ -9,11 +9,9 @@ Test::HTML::Spelling - Test the spelling of HTML documents
 
   use Test::WWW::Mechanize;
 
-  use Lingua::StopWords;
-
   my $sc = Test::HTML::Spelling->new(
-      ignore_words   => Lingua::StopWords::getStopWords('en'),
-      ignore_classes => [qw( no-spellcheck )],
+      ignore_classes   => [qw( no-spellcheck )],
+      check_attributes => [qw( title alt )],
   );
 
   $sc->speller->set_option('lang','en_GB');
