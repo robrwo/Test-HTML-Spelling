@@ -1,5 +1,8 @@
 package Example;
 
+use strict;
+use warnings;
+
 use base 'Exporter';
 
 use Test::HTML::Spelling;
