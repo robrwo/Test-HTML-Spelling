@@ -21,6 +21,8 @@ MYMETA.yml
 README
 t/00-load.t
 t/example-1.t
+t/example-2.t
+t/lib/Example.pm
 t/manifest.t
 t/pod-coverage.t
 t/pod.t
