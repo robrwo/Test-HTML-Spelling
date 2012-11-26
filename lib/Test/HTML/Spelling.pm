@@ -337,7 +337,7 @@ sub spelling_ok {
 
  __PACKAGE__->meta->make_immutable;
 
-1;
+no Moose;
 
 =head1 AUTHOR
 
