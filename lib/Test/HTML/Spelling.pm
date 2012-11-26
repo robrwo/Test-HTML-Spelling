@@ -56,7 +56,7 @@ use Search::Tokenizer;
 use Test::Builder ();
 use Text::Aspell;
 
-use version 0.77; our $VERSION = version->declare('v0.1.0');
+use version 0.77; our $VERSION = version->declare('v0.1.1');
 
 =head1 METHODS
 
@@ -292,17 +292,19 @@ sub _text {
 
 }
 
-=head2 spelling_ok
+=head2 check_spelling
 
-    $sc->spelling_ok( $content, $message );
+  if ($sc->check_spelling( $content )) {
+    ..
+  }
 
-Parses the HTML file and checks the spelling of the document text and
-selected attributes.
+Check the spelling of a document, and return true if there are no
+spelling errors.
 
 =cut
 
-sub spelling_ok {
-    my ($text, $message) = @args;
+sub check_spelling {
+    my ($text) = @args;
 
     $self->_errors(0);
     $self->parser->parse($text);
@@ -315,8 +317,22 @@ sub spelling_ok {
 		    ($self->_errors == 1) ? "error" : "errors"));
     }
 
-    $self->tester->ok($self->_errors == 0, $message);
+    return ($self->_errors == 0);
+}
 
+=head2 spelling_ok
+
+    $sc->spelling_ok( $content, $message );
+
+Parses the HTML file and checks the spelling of the document text and
+selected attributes.
+
+=cut
+
+sub spelling_ok {
+    my ($text, $message) = @args;
+
+    $self->tester->ok($self->check_spelling($text), $message);
 }
 
  __PACKAGE__->meta->make_immutable;
