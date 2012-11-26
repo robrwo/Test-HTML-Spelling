@@ -45,6 +45,9 @@ package Test::HTML::Spelling;
 use v5.10;
 
 use Moose;
+use MooseX::NonMoose;
+
+extends 'Test::Builder::Module';
 
 use curry;
 use self;
@@ -53,7 +56,6 @@ use HTML::Parser;
 use List::Util qw( reduce );
 use Scalar::Util qw( looks_like_number );
 use Search::Tokenizer;
-use Test::Builder ();
 use Text::Aspell;
 
 use version 0.77; our $VERSION = version->declare('v0.1.1');
@@ -121,7 +123,8 @@ has 'ignore_words' => (
 has 'tester' => (
     is => 'ro',
     default => sub {
-	return Test::Builder->new();
+	my $self = shift;
+	return $self->builder;
     },
 );
 
