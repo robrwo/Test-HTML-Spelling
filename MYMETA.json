@@ -59,7 +59,7 @@
          "http://www.perlfoundation.org/artistic_license_2_0"
       ],
       "repository" : {
-         "url" : "git://github.com/robrwo/test-html-spelling.git"
+         "url" : "git://github.com/robrwo/Test-HTML-Spelling.git"
       }
    },
    "version" : "0.001001"
