@@ -15,7 +15,7 @@ tests_recursive('t');
 resources (
    #homepage   => 'http://yourwebsitehere.com',
    license    => 'http://www.perlfoundation.org/artistic_license_2_0',
-   repository => 'git://github.com/robrwo/test-html-spelling.git',
+   repository => 'git://github.com/robrwo/Test-HTML-Spelling.git',
    bugtracker => 'http://rt.cpan.org/NoAuth/Bugs.html?Dist=Test-HTML-Spelling',
 );
 
