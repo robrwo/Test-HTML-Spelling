@@ -26,7 +26,7 @@ foreach my $word (qw( IANA EXAMPLE.COM EXAMPLE.ORG ARPA IDN iana iana.org )) {
 }
 
 my $sc = Test::HTML::Spelling->new(
-    stopwords      => $stopwords,
+    ignore_words   => $stopwords,
     ignore_classes => [qw( no-speling )],
     );
 
