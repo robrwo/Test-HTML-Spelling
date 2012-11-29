@@ -11,6 +11,7 @@ license  'artistic2';
 perl_version 5.010;
 
 tests_recursive('t');
+tests_recursive('xt');
 
 resources (
    #homepage   => 'http://yourwebsitehere.com',

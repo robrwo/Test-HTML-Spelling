@@ -17,7 +17,8 @@
    "no_index" : {
       "directory" : [
          "inc",
-         "t"
+         "t",
+         "xt"
       ]
    },
    "prereqs" : {

@@ -21,6 +21,7 @@ no_index:
   directory:
     - inc
     - t
+    - xt
 requires:
   HTML::Parser: 0
   List::Util: 0
