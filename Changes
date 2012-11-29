@@ -1,6 +1,9 @@
 Revision history for Test-HTML-Spelling
 
 v0.1.1
+
+	* Moved QA tests into 'xt' directory
+
 	* Reformatted Changes.
 
 	* Changed module to use Test::Builder::Module as a base
