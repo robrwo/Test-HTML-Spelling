@@ -32,6 +32,7 @@ requires (
     'HTML::Parser'	=> 0,
     'List::Util'	=> 0,
     'Moose'		=> 0,
+    'MooseX::NonMoose'  => 0,
     'Scalar::Util'	=> 0,
     'Search::Tokenizer' => 0,
     'self'		=> 0,
