@@ -9,7 +9,9 @@ use English qw( -no_match_vars );
 use File::Slurp;
 use Readonly;
 
-plan skip_all => 'set RELEASE_TESTING to enable this test' unless $ENV{RELEASE_TESTING};
+unless ( $ENV{RELEASE_TESTING} ) {
+    plan( skip_all => "Author tests not required for installation" );
+}
 
 eval "use Text::Aspell" or eval "use Text::Ispell";
 plan skip_all => 'Text::Aspell or Text::Ispell required' if $@;
