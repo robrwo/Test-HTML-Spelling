@@ -6,6 +6,11 @@ v0.1.1
 
 	* Moved QA tests into 'xt' directory.
 
+	* QA tests all require RELEASE_TESTING variable to be set.
+
+	* Developer tests require DEVELOPER_TESTING variable to be
+          set.
+
 	* Reformatted Changes.
 
 	* Changed module to use Test::Builder::Module as a base
