@@ -67,7 +67,7 @@ use version 0.77; our $VERSION = version->declare('v0.1.1');
 =head2 ignore_classes
 
 This is an accessor method for the names of element classes that will
-not be spellchecked.  It is also a constructor paramater.
+not be spellchecked.  It is also a constructor parameter.
 
 It defaults to C<no-spellcheck>.
 
@@ -82,7 +82,7 @@ has 'ignore_classes' => (
 =head2 check_attributes
 
 This is an accessor method for the names of element attributes that
-will be spellchecked.  It is also a constructor paramater.
+will be spellchecked.  It is also a constructor parameter.
 
 It defaults to C<title> and C<alt>.
 
