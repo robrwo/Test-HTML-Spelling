@@ -1,14 +1,17 @@
 Revision history for Test-HTML-Spelling
 
 v0.1.1
-	* Reformatted Changes
+	* Reformatted Changes.
 
 	* Changed module to use Test::Builder::Module as a base
-	  as is recommended in Test::Builder
+	  as is recommended in Test::Builder.
+
+	  Updated Makefile.PL requirements accordingly.
+	  (Thanks to Murray Walker for noticing this.)
 
 	* Added check_spelling method.
 
-	* Updated POD
+	* Updated POD.
 
 v0.1.0  Sat Nov 24 15:39:30 GMT 2012
 
