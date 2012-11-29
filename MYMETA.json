@@ -55,7 +55,7 @@
          }
       }
    },
-   "release_status" : "stable",
+   "release_status" : "testing",
    "resources" : {
       "bugtracker" : {
          "web" : "http://rt.cpan.org/NoAuth/Bugs.html?Dist=Test-HTML-Spelling"
@@ -67,5 +67,5 @@
          "url" : "git://github.com/robrwo/Test-HTML-Spelling.git"
       }
    },
-   "version" : "0.001001"
+   "version" : "0.001001_001"
 }

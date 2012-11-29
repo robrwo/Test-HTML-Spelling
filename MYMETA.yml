@@ -42,4 +42,4 @@ resources:
   bugtracker: http://rt.cpan.org/NoAuth/Bugs.html?Dist=Test-HTML-Spelling
   license: http://www.perlfoundation.org/artistic_license_2_0
   repository: git://github.com/robrwo/Test-HTML-Spelling.git
-version: 0.001001
+version: 0.001001_001

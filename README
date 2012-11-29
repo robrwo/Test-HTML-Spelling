@@ -1,6 +1,25 @@
 NAME
     Test::HTML::Spelling - Test the spelling of HTML documents
 
+REQUIREMENTS
+    This module requires Perl v5.10 or newer and the following non-core
+    modules:
+
+    curry
+    HTML::Parser
+    Moose
+    MooseX::NonMoose
+    Search::Tokenizer
+    self
+    Text::Aspell
+
+    The following modules are used for tests but are not needed to run this
+    module:
+
+    File::Slurp
+    Test::Pod::Spelling
+    Readonly
+
 SYNOPSIS
       use Test::More;
       use Test::HTML::Spelling;
@@ -34,49 +53,6 @@ DESCRIPTION
     class.
 
     It will fail when an HTML document if not well-formed.
-
-METHODS
-  ignore_classes
-    This is an accessor method for the names of element classes that will
-    not be spellchecked. It is also a constructor paramater.
-
-    It defaults to `no-spellcheck'.
-
-  check_attributes
-    This is an accessor method for the names of element attributes that will
-    be spellchecked. It is also a constructor paramater.
-
-    It defaults to `title' and `alt'.
-
-  ignore_words
-    This is an accessor method for setting a hash of words that will be
-    ignored by the spellchecker. Use it to specify a custom dictionary, e.g.
-
-      use File::Slurp;
-
-      my %dict = map { chomp($_); $_ => 1 } read_file('custom');
-
-      $sc->ignore_words( \%dict );
-
-  speller
-      $sc->speller->set_option('lang','en_GB');
-
-    This is an accessor that gives you access to the Text::Aspell object.
-    Use this to configure the spellchecker.
-
-  check_spelling
-      if ($sc->check_spelling( $content )) {
-        ..
-      }
-
-    Check the spelling of a document, and return true if there are no
-    spelling errors.
-
-  spelling_ok
-        $sc->spelling_ok( $content, $message );
-
-    Parses the HTML file and checks the spelling of the document text and
-    selected attributes.
 
 AUTHOR
     Robert Rothenberg, `<rrwo at cpan.org>'

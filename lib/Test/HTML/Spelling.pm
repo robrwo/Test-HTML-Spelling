@@ -2,6 +2,46 @@
 
 Test::HTML::Spelling - Test the spelling of HTML documents
 
+=begin readme
+
+=head1 REQUIREMENTS
+
+This module requires Perl v5.10 or newer and the following non-core
+modules:
+
+=over
+
+=item curry
+
+=item HTML::Parser
+
+=item Moose
+
+=item MooseX::NonMoose
+
+=item Search::Tokenizer
+
+=item self
+
+=item Text::Aspell
+
+=back
+
+The following modules are used for tests but are not needed to run
+this module:
+
+=over
+
+=item File::Slurp
+
+=item Test::Pod::Spelling
+
+=item Readonly
+
+=back
+
+=end readme
+
 =head1 SYNOPSIS
 
   use Test::More;
@@ -58,7 +98,9 @@ use Scalar::Util qw( looks_like_number );
 use Search::Tokenizer;
 use Text::Aspell;
 
-use version 0.77; our $VERSION = version->declare('v0.1.1');
+use version 0.77; our $VERSION = version->declare('v0.1.1_1');
+
+=for readme stop
 
 =head1 METHODS
 
@@ -353,6 +395,8 @@ module, rather than the test scripts that call your method.
 
 To work around this, call the L</check_spelling> method from within
 your module.
+
+=for readme continue
 
 =head1 AUTHOR
 
