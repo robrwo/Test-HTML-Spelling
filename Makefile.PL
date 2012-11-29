@@ -42,6 +42,12 @@ requires (
     'version'		=> 0.77,
 );
 
+test_requires (
+    'File::Slurp'	=> 0,
+    'Readonly'		=> 0,
+    'Test::Pod::Spelling' => 0,
+);
+
 install_as_cpan;
 auto_install;
 WriteAll;

@@ -23,6 +23,8 @@ t/00-load.t
 t/example-1.t
 t/example-2.t
 t/lib/Example.pm
+xt/etc/custom-dictionary.txt
 xt/manifest.t
 xt/pod-coverage.t
+xt/pod-spelling.t
 xt/pod.t

@@ -5,7 +5,10 @@ author:
   - 'Robert Rothenberg <rrwo@cpan.org>'
 build_requires:
   ExtUtils::MakeMaker: 6.59
+  File::Slurp: 0
+  Readonly: 0
   Test::More: 0
+  Test::Pod::Spelling: 0
 configure_requires:
   ExtUtils::MakeMaker: 6.59
   Module::Install: 0
