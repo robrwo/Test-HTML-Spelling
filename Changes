@@ -2,7 +2,9 @@ Revision history for Test-HTML-Spelling
 
 v0.1.1
 
-	* Moved QA tests into 'xt' directory
+	* Added test for POD spelling.
+
+	* Moved QA tests into 'xt' directory.
 
 	* Reformatted Changes.
 
@@ -16,7 +18,7 @@ v0.1.1
 
 	* Updated POD.
 
-v0.1.0  Sat Nov 24 15:39:30 GMT 2012
+v0.1.0  Sat Nov 24 15:39:30 GMT 2012 Robert Rothenberg <rrwo@cpan.org>
 
         * First prototype released on github.
 
