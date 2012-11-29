@@ -342,6 +342,18 @@ sub spelling_ok {
 
 no Moose;
 
+=head1 KNOWN ISSUES
+
+=head2 Using Test::HTML::Spelling in a module
+
+Suppose you subclass a module like L<Test::WWW::Mechanize> and add a
+C<spelling_ok> method that calls L</spelling_ok>.  This will work
+fine, except that any errors will be reported as coming from your
+module, rather than the test scripts that call your method.
+
+To work around this, call the L</check_spelling> method from within
+your module.
+
 =head1 AUTHOR
 
 Robert Rothenberg, C<< <rrwo at cpan.org> >>
