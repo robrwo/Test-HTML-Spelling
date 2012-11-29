@@ -5,8 +5,8 @@ use warnings FATAL => 'all';
 
 use Test::More;
 
-unless ( $ENV{RELEASE_TESTING} ) {
-    plan( skip_all => "Author tests not required for installation" );
+unless ( $ENV{DEVELOPER_TESTING} ) {
+    plan( skip_all => "Developer tests not required for installation" );
 }
 
 use Test::HTML::Spelling;
