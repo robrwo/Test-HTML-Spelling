@@ -19,6 +19,8 @@ modules:
 
 =item MooseX::NonMoose
 
+=item Readonly
+
 =item Search::Tokenizer
 
 =item self
@@ -35,8 +37,6 @@ this module:
 =item File::Slurp
 
 =item Test::Pod::Spelling
-
-=item Readonly
 
 =back
 
@@ -89,16 +89,24 @@ use MooseX::NonMoose;
 
 extends 'Test::Builder::Module';
 
+use utf8;
+
 use curry;
 use self;
 
+use Encode;
 use HTML::Parser;
 use List::Util qw( reduce );
+use Readonly;
 use Scalar::Util qw( looks_like_number );
 use Search::Tokenizer;
 use Text::Aspell;
 
-use version 0.77; our $VERSION = version->declare('v0.1.1_1');
+use version 0.77; our $VERSION = version->declare('v0.1.2_1');
+
+# A placeholder key for the default spellchecker
+
+Readonly::Scalar my $DEFAULT => '_';
 
 =for readme stop
 
@@ -209,21 +217,103 @@ has 'parser' => (
     },
 );
 
+has '_spellers' => (
+    is		=> 'ro',
+    isa		=> 'HashRef',
+    default	=> sub {
+	my $speller  = Text::Aspell->new();
+	my $self     = { $DEFAULT => $speller, };
+	return $self;
+    },
+);
+
 =head2 speller
 
-  $sc->speller->set_option('lang','en_GB');
+  my $sc = $sc->speller($lang);
 
-This is an accessor that gives you access to the L<Text::Aspell>
-object.  Use this to configure the spellchecker.
+This is an accessor that gives you access to a spellchecker for a
+particular language (where C<$lang> is a two-letter ISO 639-1 language
+code).  If the language is omitted, it returns the default
+spellchecker:
+
+  $sc->speller->set_option('sug-mode','fast');
+
+Note that options set for the default spellchecker will not be set for
+other spellcheckers.  To ensure all spellcheckers have the same
+options as the default, use something like the following:
+
+  foreach my $lang (qw( en es fs )) {
+      $sc->speller($lang)->set_option('sug-mode',
+          $sc->speller->get_option('sug-mode')
+      )
+  }
 
 =cut
 
-has 'speller' => (
-    is => 'ro',
-    default => sub {
-	return Text::Aspell->new();
-    },
-);
+sub speller {
+    my ($lang) = @args;
+    $lang =~ tr/-/_/ if (defined $lang);
+
+    if (my $speller = $self->_spellers->{ $lang // $DEFAULT }) {
+
+	return $speller;
+
+    } elsif ($lang eq $self->_spellers->{$DEFAULT}->get_option('lang')) {
+
+	$speller = $self->_spellers->{$DEFAULT};
+
+	# Extract non-regional ISO 639-1 language code
+
+	if ($lang =~ /^([a-z]{2})[_-]/) {
+	    if (defined $self->_spellers->{$1}) {
+		$speller = $self->_spellers->{$1};
+	    } else {
+		$self->_spellers->{$1} = $speller;
+	    }
+	}
+
+	$self->_spellers->{$lang} = $speller;
+
+	return $speller;
+
+    } else {
+
+	$speller = Text::Aspell->new();
+	$speller->set_option("lang", $lang);
+
+	# Extract non-regional ISO 639-1 language code
+
+	if ($lang =~ /^([a-z]{2})[_-]/) {
+	    if (defined $self->_spellers->{$1}) {
+		$speller = $self->_spellers->{$1};
+	    } else {
+		$self->_spellers->{$1} = $speller;
+	    }
+	}
+
+	$self->_spellers->{$lang} = $speller;
+
+	return $speller;
+
+    }
+}
+
+=head2 langs
+
+    my @langs = $sc->langs;
+
+Returns a list of languages (as two-letter ISO 639-1 codes) that there
+are spellcheckers for.
+
+This can be checked I<after> testing a document to ensure that the
+document does not contain markup in unexpected languages.
+
+=cut
+
+sub langs {
+    my @langs = grep { ! /[_]/ } (keys %{ $self->_spellers });
+    return @langs;
+}
 
 has '_errors' => (
     is => 'rw',
@@ -253,8 +343,16 @@ sub _is_ignored_context {
     }
 }
 
+sub _context_lang {
+    if ($self->_context_top) {
+	return $self->_context_top->{lang};
+    } else {
+	return $self->speller->get_option("lang");
+    }
+}
+
 sub _push_context {
-    my ($element, $ignore, $line) = @args;
+    my ($element, $lang, $ignore, $line) = @args;
 
     if ($self->_empty_elements->{$element}) {
 	return;
@@ -262,6 +360,7 @@ sub _push_context {
 
     unshift @{ $self->_context }, {
 	element => $element,
+	lang    => $lang,
 	ignore  => $ignore || $self->_is_ignored_context,
 	line    => $line,
     };
@@ -275,9 +374,7 @@ sub _pop_context {
     }
 
     my $context = shift @{ $self->_context };
-    if ($element ne $context->{element}) {
-	$self->tester->croak(sprintf("Expected element '%s' near input line %d", $context->{element}, $line // 0));
-    }
+    return $context;
 }
 
 sub _start_document {
@@ -300,7 +397,9 @@ sub _start_element {
 	$a || $b;
     } ($state, map { $classes{$_} // 0 } @{ $self->ignore_classes } );
 
-    $self->_push_context($tag, $ignore, $line);
+    my $lang = $attr->{lang} // $self->_context_lang;
+
+    $self->_push_context($tag, $lang, $ignore, $line);
 
     unless ($ignore) {
 
@@ -313,7 +412,15 @@ sub _start_element {
 sub _end_element {
     my ($tag, $line) = @args;
 
-    $self->_pop_context($tag, $line);
+    if (my $context = $self->_pop_context($tag, $line)) {
+
+	if ($tag ne $context->{element}) {
+	    $self->tester->croak(sprintf("Expected element '%s' near input line %d", $context->{element}, $line // 0));
+	}
+
+	my $lang = $context->{lang};
+    }
+
 }
 
 sub _text {
@@ -321,12 +428,18 @@ sub _text {
 
     unless ($self->_is_ignored_context) {
 
+	my $speller  = $self->speller( $self->_context_lang );
+	my $encoding = $speller->get_option('encoding');
+
 	my $iterator = $self->tokenizer->($text);
 
-	while (my $word = $iterator->()) {
+	while (my $u_word = $iterator->()) {
 
-	    my $check = $self->speller->check($word) || looks_like_number($word);
+	    my $word  = encode($encoding, $u_word);
+
+	    my $check = $speller->check($word) || looks_like_number($word);
 	    unless ($check) {
+
 	    	$self->_errors( 1 + $self->_errors );
 	    	$self->tester->diag("Unrecognized word: '${word}' at line ${line}");
 	    }

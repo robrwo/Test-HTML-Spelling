@@ -40,10 +40,12 @@
       },
       "runtime" : {
          "requires" : {
+            "Encode" : "0",
             "HTML::Parser" : "0",
             "List::Util" : "0",
             "Moose" : "0",
             "MooseX::NonMoose" : "0",
+            "Readonly" : "0",
             "Scalar::Util" : "0",
             "Search::Tokenizer" : "0",
             "Test::Builder" : "0",
@@ -67,5 +69,5 @@
          "url" : "git://github.com/robrwo/Test-HTML-Spelling.git"
       }
    },
-   "version" : "0.001001_001"
+   "version" : "0.001002_001"
 }

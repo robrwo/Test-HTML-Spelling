@@ -22,6 +22,7 @@ README
 t/00-load.t
 t/example-1.t
 t/example-2.t
+t/example-3.t
 t/lib/Example.pm
 xt/etc/custom-dictionary.txt
 xt/manifest.t

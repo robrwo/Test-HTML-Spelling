@@ -9,6 +9,7 @@ REQUIREMENTS
     HTML::Parser
     Moose
     MooseX::NonMoose
+    Readonly
     Search::Tokenizer
     self
     Text::Aspell
@@ -18,7 +19,6 @@ REQUIREMENTS
 
     File::Slurp
     Test::Pod::Spelling
-    Readonly
 
 SYNOPSIS
       use Test::More;
