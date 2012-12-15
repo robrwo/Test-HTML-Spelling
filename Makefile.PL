@@ -47,6 +47,7 @@ requires (
 test_requires (
     'File::Slurp'	=> 0,
     'Readonly'		=> 0,
+    'Test::Builder::Tester' => 0,
     'Test::Pod::Spelling' => 0,
 );
 
