@@ -2,6 +2,8 @@ Revision history for Test-HTML-Spelling
 
 v0.1.2_1
 
+	* Added tests.
+
 	* Added REQUIREMENTS section to POD for Pod::Readme and
 	  marked sections to be skipped for Pod::Readme.
 
