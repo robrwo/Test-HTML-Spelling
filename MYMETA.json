@@ -28,6 +28,7 @@
             "File::Slurp" : "0",
             "Module::Install" : "0",
             "Readonly" : "0",
+            "Test::Builder::Tester" : "0",
             "Test::More" : "0",
             "Test::Pod::Spelling" : "0"
          }
@@ -40,10 +41,12 @@
       },
       "runtime" : {
          "requires" : {
+            "Encode" : "0",
             "HTML::Parser" : "0",
             "List::Util" : "0",
             "Moose" : "0",
             "MooseX::NonMoose" : "0",
+            "Readonly" : "0",
             "Scalar::Util" : "0",
             "Search::Tokenizer" : "0",
             "Test::Builder" : "0",
@@ -55,7 +58,7 @@
          }
       }
    },
-   "release_status" : "stable",
+   "release_status" : "testing",
    "resources" : {
       "bugtracker" : {
          "web" : "http://rt.cpan.org/NoAuth/Bugs.html?Dist=Test-HTML-Spelling"
@@ -67,5 +70,5 @@
          "url" : "git://github.com/robrwo/Test-HTML-Spelling.git"
       }
    },
-   "version" : "0.001001"
+   "version" : "0.001002_001"
 }

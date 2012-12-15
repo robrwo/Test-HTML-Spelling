@@ -1,3 +1,5 @@
 accessor
+lang
+langs
 licensable
 spelling_ok
