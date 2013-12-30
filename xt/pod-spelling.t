@@ -13,8 +13,11 @@ unless ( $ENV{RELEASE_TESTING} ) {
     plan( skip_all => "Author tests not required for installation" );
 }
 
-eval "use Text::Aspell" or eval "use Text::Ispell";
-plan skip_all => 'Text::Aspell or Text::Ispell required' if $@;
+eval "use Text::Aspell";
+plan skip_all => 'Text::Aspell required' if $@;
+
+eval "use Text::Ispell";
+plan skip_all => 'Text::Ispell required' if $@;
 
 eval "use Lingua::Ispell";
 plan skip_all => 'Lingua::Ispell required' if $@;
