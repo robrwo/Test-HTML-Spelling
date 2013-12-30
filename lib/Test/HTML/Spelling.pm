@@ -511,13 +511,23 @@ your module.
 
 =for readme continue
 
+=head1 SEE ALSO
+
+The following modules have similar functionality:
+
+=over 4
+
+=item L<Apache::AxKit::Language::SpellCheck>
+
+=back
+
 =head1 AUTHOR
 
 Robert Rothenberg, C<< <rrwo at cpan.org> >>
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2012 Robert Rothenberg.
+Copyright 2012-2013 Robert Rothenberg.
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of the the Artistic License (2.0). You may obtain a
