@@ -38,7 +38,6 @@ requires (
     'Readonly'		=> 0,
     'Scalar::Util'	=> 0,
     'Search::Tokenizer' => 0,
-    'self'		=> 0,
     'Test::Builder'	=> 0,
     'Text::Aspell'	=> 0,
     'version'		=> 0.77,
