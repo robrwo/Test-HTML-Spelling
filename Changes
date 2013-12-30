@@ -1,5 +1,9 @@
 Revision history for Test-HTML-Spelling
 
+        * Removed dependency on the "self" module (GitHub#2)
+
+        * Tweaks to the POD spelling test
+
 v0.2.2  Mon Dec 30 14:03:00 GMT 2013  Robert Rothenberg <rrwo@cpan.org>
 
         * Removed MYMETA files from distribution (RT#89125)
