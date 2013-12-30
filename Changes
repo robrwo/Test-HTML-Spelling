@@ -1,5 +1,7 @@
 Revision history for Test-HTML-Spelling
 
+v0.3.0 - 2013-12-30
+
        - Removed dependency on the "self" module (GitHub#2)
 
        - Tweaks to the POD spelling test
