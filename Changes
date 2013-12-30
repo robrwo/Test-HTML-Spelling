@@ -3,15 +3,13 @@ Revision history for Test-HTML-Spelling
 v0.3.0 - 2013-12-30
 
        - Removed dependency on the "self" module (GitHub#2)
-
        - Tweaks to the POD spelling test
-
        - Reformatted Changes file (GitHub#3)
+       - Updated README accordignly.
 
 v0.2.2 - 2013-12-30
 
        - Removed MYMETA files from distribution (RT#89125)
-
        - Added SEE ALSO section to POD (GitHub#1)
 
 v0.2.1 - 2012-12-16
@@ -22,38 +20,26 @@ v0.2.1 - 2012-12-16
 v0.2.0 - 2012-12-15
 
        - Added tests.
-
        - Added REQUIREMENTS section to POD for Pod::Readme and marked
 	 sections to be skipped for Pod::Readme.
-
        - Added support for multiple spellers paramaterized by
          language.
-
        - Added checks for the lang attribute to use the appropriate
          speller for the language.
-
        - Updated POD appropriately.
 
 v0.1.1 - 2012-11-29
 
        - Added test for POD spelling.
-
        - Moved QA tests into 'xt' directory.
-
        - QA tests all require RELEASE_TESTING variable to be set.
-
        - Developer tests require DEVELOPER_TESTING variable to be set.
-
        - Reformatted Changes.
-
        - Changed module to use Test::Builder::Module as a base
 	 as is recommended in Test::Builder.
-
 	 Updated Makefile.PL requirements accordingly. (Thanks to
 	 Murray Walker for noticing this.)
-
        - Added check_spelling method.
-
        - Updated POD.
 
 v0.1.0 - 2012-11-24
