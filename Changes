@@ -1,57 +1,62 @@
 Revision history for Test-HTML-Spelling
 
-v0.2.2  Mon Dec 30 14:03:00 GMT 2013  Robert Rothenberg <rrwo@cpan.org>
+       - Removed dependency on the "self" module (GitHub#2)
 
-        * Removed MYMETA files from distribution (RT#89125)
+       - Tweaks to the POD spelling test
 
-        * Added SEE ALSO section to POD (GitHub#1)
+       - Reformatted Changes file (GitHub#3)
 
-v0.2.1  Sun Dec 16 15:29:30 GMT 2012  Robert Rothenberg <rrwo@cpan.org>
+v0.2.2 - 2013-12-30
 
-	* Removed example tests that were causing problems for some
+       - Removed MYMETA files from distribution (RT#89125)
+
+       - Added SEE ALSO section to POD (GitHub#1)
+
+v0.2.1 - 2012-12-16
+
+	- Removed example tests that were causing problems for some
           users. (These tests were meant for developers anyway.)
 
-v0.2.0  Sat Dec 15 23:15:59 GMT 2012 Robert Rothenberg <rrwo@cpan.org>
+v0.2.0 - 2012-12-15
 
-	* Added tests.
+       - Added tests.
 
-	* Added REQUIREMENTS section to POD for Pod::Readme and
-	  marked sections to be skipped for Pod::Readme.
+       - Added REQUIREMENTS section to POD for Pod::Readme and marked
+	 sections to be skipped for Pod::Readme.
 
-	* Added support for multiple spellers paramaterized by
-          language.
+       - Added support for multiple spellers paramaterized by
+         language.
 
-	* Added checks for the lang attribute to use the appropriate
-          speller for the language.
+       - Added checks for the lang attribute to use the appropriate
+         speller for the language.
 
-	* Updated POD appropriately.
+       - Updated POD appropriately.
 
-v0.1.1  Thu Nov 29 13:22:40 GMT 2012 Robert Rothenberg <rrwo@cpan.org>
+v0.1.1 - 2012-11-29
 
-	* Added test for POD spelling.
+       - Added test for POD spelling.
 
-	* Moved QA tests into 'xt' directory.
+       - Moved QA tests into 'xt' directory.
 
-	* QA tests all require RELEASE_TESTING variable to be set.
+       - QA tests all require RELEASE_TESTING variable to be set.
 
-	* Developer tests require DEVELOPER_TESTING variable to be
-          set.
+       - Developer tests require DEVELOPER_TESTING variable to be set.
 
-	* Reformatted Changes.
+       - Reformatted Changes.
 
-	* Changed module to use Test::Builder::Module as a base
-	  as is recommended in Test::Builder.
+       - Changed module to use Test::Builder::Module as a base
+	 as is recommended in Test::Builder.
 
-	  Updated Makefile.PL requirements accordingly.
-	  (Thanks to Murray Walker for noticing this.)
+	 Updated Makefile.PL requirements accordingly. (Thanks to
+	 Murray Walker for noticing this.)
 
-	* Added check_spelling method.
+       - Added check_spelling method.
 
-	* Updated POD.
+       - Updated POD.
 
-v0.1.0  Sat Nov 24 15:39:30 GMT 2012 Robert Rothenberg <rrwo@cpan.org>
+v0.1.0 - 2012-11-24
 
-        * First prototype released on github.
+       - First prototype released on GitHub.
 
 
 

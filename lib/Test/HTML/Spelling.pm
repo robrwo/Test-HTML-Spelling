@@ -92,7 +92,6 @@ extends 'Test::Builder::Module';
 use utf8;
 
 use curry;
-use self;
 
 use Encode;
 use HTML::Parser;
@@ -251,7 +250,7 @@ options as the default, use something like the following:
 =cut
 
 sub speller {
-    my ($lang) = @args;
+    my ($self, $lang) = @_;
     $lang =~ tr/-/_/ if (defined $lang);
 
     if (my $speller = $self->_spellers->{ $lang // $DEFAULT }) {
@@ -311,6 +310,7 @@ document does not contain markup in unexpected languages.
 =cut
 
 sub langs {
+    my ($self) = @_;
     my @langs = grep { ! /[_]/ } (keys %{ $self->_spellers });
     return @langs;
 }
@@ -328,14 +328,17 @@ has '_context' => (
 );
 
 sub _context_depth {
+    my ($self) = @_;
     return scalar(@{$self->_context});
 }
 
 sub _context_top {
+    my ($self) = @_;
     return $self->_context->[0];
 }
 
 sub _is_ignored_context {
+    my ($self) = @_;
     if ($self->_context_depth) {
 	return $self->_context_top->{ignore};
     } else {
@@ -344,6 +347,7 @@ sub _is_ignored_context {
 }
 
 sub _context_lang {
+    my ($self) = @_;
     if ($self->_context_top) {
 	return $self->_context_top->{lang};
     } else {
@@ -352,7 +356,7 @@ sub _context_lang {
 }
 
 sub _push_context {
-    my ($element, $lang, $ignore, $line) = @args;
+    my ($self, $element, $lang, $ignore, $line) = @_;
 
     if ($self->_empty_elements->{$element}) {
 	return;
@@ -367,7 +371,7 @@ sub _push_context {
 }
 
 sub _pop_context {
-    my ($element, $line) = @args;
+    my ($self, $element, $line) = @_;
 
     if ($self->_empty_elements->{$element}) {
 	return;
@@ -378,13 +382,14 @@ sub _pop_context {
 }
 
 sub _start_document {
+    my ($self) = @_;
     $self->_context([]);
     $self->_errors(0);
 
 }
 
 sub _start_element {
-    my ($tag, $attr, $line) = @args;
+    my ($self, $tag, $attr, $line) = @_;
 
     $attr //= { };
 
@@ -410,7 +415,7 @@ sub _start_element {
 }
 
 sub _end_element {
-    my ($tag, $line) = @args;
+    my ($self, $tag, $line) = @_;
 
     if (my $context = $self->_pop_context($tag, $line)) {
 
@@ -424,7 +429,7 @@ sub _end_element {
 }
 
 sub _text {
-    my ($text, $line) = (@args);
+    my ($self, $text, $line) = @_;
 
     unless ($self->_is_ignored_context) {
 
@@ -462,7 +467,7 @@ spelling errors.
 =cut
 
 sub check_spelling {
-    my ($text) = @args;
+    my ($self, $text) = @_;
 
     $self->_errors(0);
     $self->parser->parse($text);
@@ -488,7 +493,7 @@ selected attributes.
 =cut
 
 sub spelling_ok {
-    my ($text, $message) = @args;
+    my ($self, $text, $message) = @_;
 
     $self->tester->ok($self->check_spelling($text), $message);
 }
