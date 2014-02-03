@@ -5,9 +5,9 @@ use warnings;
 
 use Test::More;
 
+use Const::Fast;
 use English qw( -no_match_vars );
 use File::Slurp;
-use Readonly;
 
 unless ( $ENV{RELEASE_TESTING} ) {
     plan( skip_all => "Author tests not required for installation" );
@@ -25,7 +25,7 @@ plan skip_all => 'Lingua::Ispell required' if $@;
 eval "require Test::Pod::Spelling";
 plan skip_all => 'Test::Pod::Spelling required' if $@;
 
-Readonly::Scalar my $dictionary => 'xt/etc/custom-dictionary.txt';
+const my $dictionary => 'xt/etc/custom-dictionary.txt';
 
 Test::Pod::Spelling->import(
     spelling => {

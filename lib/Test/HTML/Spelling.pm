@@ -11,21 +11,19 @@ modules:
 
 =over
 
-=item curry
+=item L<Const::Fast>
 
-=item HTML::Parser
+=item L<curry>
 
-=item Moose
+=item L<HTML::Parser>
 
-=item MooseX::NonMoose
+=item L<Moose>
 
-=item Readonly
+=item L<MooseX::NonMoose>
 
-=item Search::Tokenizer
+=item L<Search::Tokenizer>
 
-=item self
-
-=item Text::Aspell
+=item L<Text::Aspell>
 
 =back
 
@@ -34,9 +32,11 @@ this module:
 
 =over
 
-=item File::Slurp
+=item L<File::Slurp>
 
-=item Test::Pod::Spelling
+=item L<Test::Builder>
+
+=item L<Test::Pod::Spelling>
 
 =back
 
@@ -93,19 +93,19 @@ use utf8;
 
 use curry;
 
+use Const::Fast;
 use Encode;
 use HTML::Parser;
 use List::Util qw( reduce );
-use Readonly;
 use Scalar::Util qw( looks_like_number );
 use Search::Tokenizer;
 use Text::Aspell;
 
-use version 0.77; our $VERSION = version->declare('v0.3.0');
+use version 0.77; our $VERSION = version->declare('v0.3.1');
 
 # A placeholder key for the default spellchecker
 
-Readonly::Scalar my $DEFAULT => '_';
+const my $DEFAULT => '_';
 
 =for readme stop
 
@@ -532,7 +532,7 @@ Robert Rothenberg, C<< <rrwo at cpan.org> >>
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2012-2013 Robert Rothenberg.
+Copyright 2012-2014 Robert Rothenberg.
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of the the Artistic License (2.0). You may obtain a
