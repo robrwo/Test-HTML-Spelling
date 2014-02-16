@@ -171,6 +171,7 @@ has 'ignore_words' => (
 
 has 'tester' => (
     is => 'ro',
+    lazy => 1,
     default => sub {
 	my $self = shift;
 	return $self->builder;
@@ -179,10 +180,13 @@ has 'tester' => (
 
 has 'tokenizer' => (
     is => 'rw',
+    lazy => 1,
     default => sub {
 
 	my ($self) = @_;
 
+	#use Data::Dumper;
+	#print STDERR "Ignore words are: " . Data::Dumper->Dump([$self->ignore_words]) . "\n";
 	return Search::Tokenizer->new(
 
 	    regex	=> qr/\p{Word}+(?:[-'.]\p{Word}+)*/,
@@ -196,6 +200,7 @@ has 'tokenizer' => (
 
 has 'parser' => (
     is => 'ro',
+    lazy => 1,
     default => sub {
 	my ($self) = @_;
 
@@ -219,6 +224,7 @@ has 'parser' => (
 has '_spellers' => (
     is		=> 'ro',
     isa		=> 'HashRef',
+    lazy        => 1,
     default	=> sub {
 	my $speller  = Text::Aspell->new();
 	my $self     = { $DEFAULT => $speller, };
