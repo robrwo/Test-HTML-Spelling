@@ -185,8 +185,6 @@ has 'tokenizer' => (
 
 	my ($self) = @_;
 
-	#use Data::Dumper;
-	#print STDERR "Ignore words are: " . Data::Dumper->Dump([$self->ignore_words]) . "\n";
 	return Search::Tokenizer->new(
 
 	    regex	=> qr/\p{Word}+(?:[-'.]\p{Word}+)*/,
