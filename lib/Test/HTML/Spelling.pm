@@ -446,7 +446,7 @@ sub _text {
 
 	    my $word  = encode($encoding, $u_word);
 
-	    my $check = $speller->check($word) || looks_like_number($word);
+	    my $check = $speller->check($word) || looks_like_number($word) || $word =~ /^\d+(?:[-'.]\d+)*/;
 	    unless ($check) {
 
 	    	$self->_errors( 1 + $self->_errors );
