@@ -1,5 +1,11 @@
 Revision history for Test-HTML-Spelling
 
+v0.3.3   2014-02-18
+
+       - Updated README.
+
+       - Minor POD markup tweaks.
+
 v0.3.2   2014-02-18
 
        - Made Moose attributes lazy [Rusty Conover].
