@@ -1,5 +1,12 @@
 Revision history for Test-HTML-Spelling
 
+v0.3.2   2014-02-18
+
+       - Made Moose attributes lazy [Rusty Conover].
+
+       - Ignore numbers separated by digits, e.g. "2013-2014"
+         [Rusty Conover and Robert Rothenberg].
+
 v0.3.1  2014-02-03
 
        - Updated POD formatting.

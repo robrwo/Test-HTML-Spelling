@@ -9,4 +9,7 @@ Makefile
 
 Test-HTML-Spelling-*.tar.gz
 
+META.yml
+
 MYMETA.*
+
