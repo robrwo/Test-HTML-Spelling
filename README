@@ -5,19 +5,19 @@ REQUIREMENTS
     This module requires Perl v5.10 or newer and the following non-core
     modules:
 
+    Const::Fast
     curry
     HTML::Parser
     Moose
     MooseX::NonMoose
-    Readonly
     Search::Tokenizer
-    self
     Text::Aspell
 
     The following modules are used for tests but are not needed to run this
     module:
 
     File::Slurp
+    Test::Builder
     Test::Pod::Spelling
 
 SYNOPSIS
@@ -62,8 +62,13 @@ SEE ALSO
 AUTHOR
     Robert Rothenberg, `<rrwo at cpan.org>'
 
+  Contributors and Acknowledgements
+    * Rusty Conover
+    * Murray Walker
+    * Interactive Information, Ltd.
+
 LICENSE AND COPYRIGHT
-    Copyright 2012-2013 Robert Rothenberg.
+    Copyright 2012-2014 Robert Rothenberg.
 
     This program is free software; you can redistribute it and/or modify it
     under the terms of the the Artistic License (2.0). You may obtain a copy

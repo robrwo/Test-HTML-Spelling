@@ -101,7 +101,7 @@ use Scalar::Util qw( looks_like_number );
 use Search::Tokenizer;
 use Text::Aspell;
 
-use version 0.77; our $VERSION = version->declare('v0.3.2');
+use version 0.77; our $VERSION = version->declare('v0.3.3');
 
 # A placeholder key for the default spellchecker
 
@@ -538,11 +538,11 @@ Robert Rothenberg, C<< <rrwo at cpan.org> >>
 
 =over
 
-=item Rusty Conover
+=item * Rusty Conover
 
-=item Murray Walker
+=item * Murray Walker
 
-=item Interactive Information, Ltd.
+=item * Interactive Information, Ltd.
 
 =back
 
