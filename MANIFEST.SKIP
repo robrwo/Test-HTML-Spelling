@@ -11,3 +11,7 @@
 Test-HTML-Spelling-.*\.tar\.gz
 
 ^MYMETA\.*
+
+# QA tests not needed for distribution
+
+^xt/
