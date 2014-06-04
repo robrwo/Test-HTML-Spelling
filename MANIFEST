@@ -19,8 +19,3 @@ META.yml
 README
 t/00-load.t
 t/10-spelling.t
-xt/etc/custom-dictionary.txt
-xt/manifest.t
-xt/pod-coverage.t
-xt/pod-spelling.t
-xt/pod.t
