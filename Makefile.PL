@@ -5,7 +5,6 @@ use inc::Module::Install;
 
 name     'Test-HTML-Spelling';
 all_from 'lib/Test/HTML/Spelling.pm';
-author   q{Robert Rothenberg <rrwo@cpan.org>};
 license  'artistic2';
 
 perl_version 5.010;
