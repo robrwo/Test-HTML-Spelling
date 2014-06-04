@@ -1,5 +1,7 @@
 Revision history for Test-HTML-Spelling
 
+v0.3.4   2014-06-04
+
        - Tweaked MANIFEST.SKIP rules.
 
        - Updated bugtracker URL in metadata.
