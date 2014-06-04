@@ -1,5 +1,7 @@
 Revision history for Test-HTML-Spelling
 
+       - Updated bugtracker URL in metadata.
+
        - Removed QA tests from the distribution.
 
        - Removed unnecessary dependency from Makefile.PL.
