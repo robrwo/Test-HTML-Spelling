@@ -10,6 +10,7 @@ REQUIREMENTS
     HTML::Parser
     Moose
     MooseX::NonMoose
+    namespace::autoclean
     Search::Tokenizer
     Text::Aspell
 
