@@ -9,6 +9,7 @@ inc/*
 Makefile
 
 Test-HTML-Spelling-*.tar.gz
+Test-HTML-Spelling-*/
 
 META.yml
 
