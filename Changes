@@ -1,5 +1,7 @@
 Revision history for Test-HTML-Spelling
 
+       - Clean namespace.
+
 v0.3.5   2014-06-04
 
        - Fixed bug in distribution that required the missing xt

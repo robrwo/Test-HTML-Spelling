@@ -26,18 +26,19 @@ build_requires (
 );
 
 requires (
-    'Const::Fast'       => 0,
-    'curry'		=> 0,
-    'Encode'		=> 0,
-    'HTML::Parser'	=> 0,
-    'List::Util'	=> 0,
-    'Moose'		=> 0,
-    'MooseX::NonMoose'  => 0,
-    'Scalar::Util'	=> 0,
-    'Search::Tokenizer' => 0,
-    'Test::Builder'	=> 0,
-    'Text::Aspell'	=> 0,
-    'version'		=> 0.77,
+    'Const::Fast'          => 0,
+    'curry'                => 0,
+    'Encode'               => 0,
+    'HTML::Parser'         => 0,
+    'List::Util'           => 0,
+    'Moose'                => 0,
+    'MooseX::NonMoose'     => 0,
+    'namespace::autoclean' => 0,
+    'Scalar::Util'         => 0,
+    'Search::Tokenizer'    => 0,
+    'Test::Builder'        => 0,
+    'Text::Aspell'         => 0,
+    'version'              => 0.77,
 );
 
 test_requires (

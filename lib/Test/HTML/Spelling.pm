@@ -21,6 +21,8 @@ modules:
 
 =item L<MooseX::NonMoose>
 
+=item L<namespace::autoclean>
+
 =item L<Search::Tokenizer>
 
 =item L<Text::Aspell>
@@ -588,5 +590,7 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 =cut
+
+use namespace::autoclean;
 
 1; # End of Test::HTML::Spelling
