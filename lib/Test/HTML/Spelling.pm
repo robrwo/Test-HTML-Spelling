@@ -21,6 +21,8 @@ modules:
 
 =item L<MooseX::NonMoose>
 
+=item L<namespace::autoclean>
+
 =item L<Search::Tokenizer>
 
 =item L<Text::Aspell>
@@ -101,7 +103,7 @@ use Scalar::Util qw( looks_like_number );
 use Search::Tokenizer;
 use Text::Aspell;
 
-use version 0.77; our $VERSION = version->declare('v0.3.5');
+use version 0.77; our $VERSION = version->declare('v0.3.6');
 
 # A placeholder key for the default spellchecker
 
@@ -588,5 +590,7 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 =cut
+
+use namespace::autoclean;
 
 1; # End of Test::HTML::Spelling
