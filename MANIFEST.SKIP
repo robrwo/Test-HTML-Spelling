@@ -16,3 +16,7 @@ Test-HTML-Spelling-v\d+\.\d+\.\d+/
 # QA tests not needed for distribution
 
 ^xt/
+
+# Travis-CI
+
+^\.travis\.yml$
