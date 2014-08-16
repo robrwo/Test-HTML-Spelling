@@ -103,7 +103,7 @@ use Scalar::Util qw( looks_like_number );
 use Search::Tokenizer;
 use Text::Aspell;
 
-use version 0.77; our $VERSION = version->declare('v0.3.6');
+use version 0.77; our $VERSION = version->declare('v0.3.7');
 
 # A placeholder key for the default spellchecker
 
