@@ -5,7 +5,7 @@ use inc::Module::Install;
 
 name     'Test-HTML-Spelling';
 all_from 'lib/Test/HTML/Spelling.pm';
-license  'artistic2';
+license  'artistic_2';
 
 perl_version 5.010;
 
