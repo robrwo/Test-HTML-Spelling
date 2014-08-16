@@ -1,6 +1,11 @@
 Revision history for Test-HTML-Spelling
 
+v0.3.7   2014-08-16
+
+       - Fixed license in Makefile.PL to make CPANTS happy.
+
 v0.3.6   2004-06-18
+
        - Clean namespace.
 
 v0.3.5   2014-06-04
