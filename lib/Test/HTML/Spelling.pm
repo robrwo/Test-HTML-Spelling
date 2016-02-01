@@ -78,7 +78,7 @@ C<no-spellcheck>.  For example, elements that contain user input, or
 placenames that are unlikely to be in a dictionary (such as timezones)
 should be in this class.
 
-It will fail when an HTML document if not well-formed.
+It will fail when an HTML document is not well-formed.
 
 =cut
 
