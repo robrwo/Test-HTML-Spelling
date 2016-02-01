@@ -1,5 +1,7 @@
 Revision history for Test-HTML-Spelling
 
+       - Fixed typo in POD (Shlomi Fish)
+
 v0.3.7   2014-08-16
 
        - Fixed license in Makefile.PL to make CPANTS happy.
@@ -107,4 +109,3 @@ v0.1.1  2012-11-29
 v0.1.0  2012-11-24
 
        - First prototype released on GitHub.
-
