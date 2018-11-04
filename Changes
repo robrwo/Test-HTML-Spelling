@@ -1,11 +1,13 @@
 Revision history for {{ $dist->name }}
 
 {{$NEXT}}
-       - Fixed typo in POD (Shlomi Fish)
-       - Convert the distribution to use Dist-Zilla as the build system
-         instead of the undermaintained and unloved Module-Install.
-            - See dist.ini and weaver.ini.
-            - Thanks to Shlomi Fish
+  [Documentation]
+   - Fixed typo in POD (Shlomi Fish)
+
+  [Toolchain]
+  - Convert the distribution to use Dist-Zilla as the build system
+    instead of the undermaintained and unloved Module-Install.
+    (Shlomi Fish)
 
 
 v0.3.7   2014-08-16
