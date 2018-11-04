@@ -6,3 +6,10 @@
 
 Test-HTML-Spelling-*.tar.gz
 Test-HTML-Spelling-*/
+
+MYMETA.*
+
+Makefile
+
+blib/
+pm_to_blib
