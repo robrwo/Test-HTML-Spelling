@@ -11,6 +11,9 @@ Revision history for {{ $dist->name }}
     instead of the undermaintained and unloved Module-Install.
     (Shlomi Fish)
 
+  [Other]
+  - Perltidy source.
+
 
 v0.3.7   2014-08-16
 

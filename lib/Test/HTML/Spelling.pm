@@ -123,9 +123,9 @@ It defaults to C<no-spellcheck>.
 =cut
 
 has 'ignore_classes' => (
-    is		=> 'rw',
-    isa		=> 'ArrayRef[Str]',
-    default	=> sub { [qw( no-spellcheck )] },
+    is      => 'rw',
+    isa     => 'ArrayRef[Str]',
+    default => sub { [qw( no-spellcheck )] },
 );
 
 =head2 check_attributes
@@ -138,15 +138,21 @@ It defaults to C<title> and C<alt>.
 =cut
 
 has 'check_attributes' => (
-    is		=> 'rw',
-    isa		=> 'ArrayRef[Str]',
-    default	=> sub { [qw( title alt )] },
+    is      => 'rw',
+    isa     => 'ArrayRef[Str]',
+    default => sub { [qw( title alt )] },
 );
 
 has '_empty_elements' => (
-    is		=> 'rw',
-    isa		=> 'HashRef',
-    default	=> sub { return { map { $_ => 1 } (qw( area base basefont br col frame hr img input isindex link meta param )) } },
+    is      => 'rw',
+    isa     => 'HashRef',
+    default => sub {
+        return {
+            map { $_ => 1 } (
+                qw( area base basefont br col frame hr img input isindex link meta param )
+            )
+        };
+    },
 );
 
 =head2 ignore_words
@@ -164,69 +170,70 @@ e.g.
 =cut
 
 has 'ignore_words' => (
-    is => 'rw',
-    isa => 'HashRef',
-    default => sub { { } },
+    is      => 'rw',
+    isa     => 'HashRef',
+    default => sub { {} },
 );
 
 has 'tester' => (
-    is => 'ro',
-    lazy => 1,
+    is      => 'ro',
+    lazy    => 1,
     default => sub {
-	my $self = shift;
-	return $self->builder;
+        my $self = shift;
+        return $self->builder;
     },
 );
 
 has 'tokenizer' => (
-    is => 'rw',
-    lazy => 1,
+    is      => 'rw',
+    lazy    => 1,
     default => sub {
 
-	my ($self) = @_;
+        my ($self) = @_;
 
-	return Search::Tokenizer->new(
+        return Search::Tokenizer->new(
 
-	    regex	=> qr/\p{Word}+(?:[-'.]\p{Word}+)*/,
-	    lower	=> 0,
-	    stopwords	=> $self->ignore_words,
+            regex     => qr/\p{Word}+(?:[-'.]\p{Word}+)*/,
+            lower     => 0,
+            stopwords => $self->ignore_words,
 
-	);
+        );
 
     },
 );
 
 has 'parser' => (
-    is => 'ro',
-    lazy => 1,
+    is      => 'ro',
+    lazy    => 1,
     default => sub {
-	my ($self) = @_;
+        my ($self) = @_;
 
-	return HTML::Parser->new(
+        return HTML::Parser->new(
 
-	    api_version		=> 3,
+            api_version => 3,
 
-	    ignore_elements	=> [qw( script style )],
-	    empty_element_tags	=> 1,
+            ignore_elements    => [qw( script style )],
+            empty_element_tags => 1,
 
-	    start_document_h	=> [ $self->curry::_start_document ],
-	    start_h		=> [ $self->curry::_start_element, "tagname,attr,line,column" ],
-	    end_h		=> [ $self->curry::_end_element,   "tagname,line" ],
-	    text_h		=> [ $self->curry::_text,          "dtext,line,column" ],
+            start_document_h => [ $self->curry::_start_document ],
+            start_h =>
+              [ $self->curry::_start_element, "tagname,attr,line,column" ],
+            end_h  => [ $self->curry::_end_element, "tagname,line" ],
+            text_h => [ $self->curry::_text,        "dtext,line,column" ],
 
-	);
+        );
 
     },
 );
 
 has '_spellers' => (
-    is		=> 'ro',
-    isa		=> 'HashRef',
-    lazy        => 1,
-    default	=> sub {
-	my $speller  = Text::Aspell->new();
-	my $self     = { $DEFAULT => $speller, };
-	return $self;
+    is      => 'ro',
+    isa     => 'HashRef',
+    lazy    => 1,
+    default => sub {
+        my $speller = Text::Aspell->new();
+        my $self = { $DEFAULT => $speller, };
+        return $self;
     },
 );
 
@@ -254,49 +261,53 @@ options as the default, use something like the following:
 =cut
 
 sub speller {
-    my ($self, $lang) = @_;
-    $lang =~ tr/-/_/ if (defined $lang);
+    my ( $self, $lang ) = @_;
+    $lang =~ tr/-/_/ if ( defined $lang );
 
-    if (my $speller = $self->_spellers->{ $lang // $DEFAULT }) {
+    if ( my $speller = $self->_spellers->{ $lang // $DEFAULT } ) {
 
-	return $speller;
+        return $speller;
 
-    } elsif ($lang eq $self->_spellers->{$DEFAULT}->get_option('lang')) {
+    }
+    elsif ( $lang eq $self->_spellers->{$DEFAULT}->get_option('lang') ) {
 
-	$speller = $self->_spellers->{$DEFAULT};
+        $speller = $self->_spellers->{$DEFAULT};
 
-	# Extract non-regional ISO 639-1 language code
+        # Extract non-regional ISO 639-1 language code
 
-	if ($lang =~ /^([a-z]{2})[_-]/) {
-	    if (defined $self->_spellers->{$1}) {
-		$speller = $self->_spellers->{$1};
-	    } else {
-		$self->_spellers->{$1} = $speller;
-	    }
-	}
+        if ( $lang =~ /^([a-z]{2})[_-]/ ) {
+            if ( defined $self->_spellers->{$1} ) {
+                $speller = $self->_spellers->{$1};
+            }
+            else {
+                $self->_spellers->{$1} = $speller;
+            }
+        }
 
-	$self->_spellers->{$lang} = $speller;
+        $self->_spellers->{$lang} = $speller;
 
-	return $speller;
+        return $speller;
 
-    } else {
+    }
+    else {
 
-	$speller = Text::Aspell->new();
-	$speller->set_option("lang", $lang);
+        $speller = Text::Aspell->new();
+        $speller->set_option( "lang", $lang );
 
-	# Extract non-regional ISO 639-1 language code
+        # Extract non-regional ISO 639-1 language code
 
-	if ($lang =~ /^([a-z]{2})[_-]/) {
-	    if (defined $self->_spellers->{$1}) {
-		$speller = $self->_spellers->{$1};
-	    } else {
-		$self->_spellers->{$1} = $speller;
-	    }
-	}
+        if ( $lang =~ /^([a-z]{2})[_-]/ ) {
+            if ( defined $self->_spellers->{$1} ) {
+                $speller = $self->_spellers->{$1};
+            }
+            else {
+                $self->_spellers->{$1} = $speller;
+            }
+        }
 
-	$self->_spellers->{$lang} = $speller;
+        $self->_spellers->{$lang} = $speller;
 
-	return $speller;
+        return $speller;
 
     }
 }
@@ -315,25 +326,25 @@ document does not contain markup in unexpected languages.
 
 sub langs {
     my ($self) = @_;
-    my @langs = grep { ! /[_]/ } (keys %{ $self->_spellers });
+    my @langs = grep { !/[_]/ } ( keys %{ $self->_spellers } );
     return @langs;
 }
 
 has '_errors' => (
-    is => 'rw',
-    isa => 'Int',
+    is      => 'rw',
+    isa     => 'Int',
     default => 0,
 );
 
 has '_context' => (
-    is		=> 'rw',
-    isa		=> 'ArrayRef[HashRef]',
-    default	=> sub { [ ] },
+    is      => 'rw',
+    isa     => 'ArrayRef[HashRef]',
+    default => sub { [] },
 );
 
 sub _context_depth {
     my ($self) = @_;
-    return scalar(@{$self->_context});
+    return scalar( @{ $self->_context } );
 }
 
 sub _context_top {
@@ -343,42 +354,45 @@ sub _context_top {
 
 sub _is_ignored_context {
     my ($self) = @_;
-    if ($self->_context_depth) {
-	return $self->_context_top->{ignore};
-    } else {
-	return 0;
+    if ( $self->_context_depth ) {
+        return $self->_context_top->{ignore};
+    }
+    else {
+        return 0;
     }
 }
 
 sub _context_lang {
     my ($self) = @_;
-    if ($self->_context_top) {
-	return $self->_context_top->{lang};
-    } else {
-	return $self->speller->get_option("lang");
+    if ( $self->_context_top ) {
+        return $self->_context_top->{lang};
+    }
+    else {
+        return $self->speller->get_option("lang");
     }
 }
 
 sub _push_context {
-    my ($self, $element, $lang, $ignore, $line) = @_;
+    my ( $self, $element, $lang, $ignore, $line ) = @_;
 
-    if ($self->_empty_elements->{$element}) {
-	return;
+    if ( $self->_empty_elements->{$element} ) {
+        return;
     }
 
-    unshift @{ $self->_context }, {
-	element => $element,
-	lang    => $lang,
-	ignore  => $ignore || $self->_is_ignored_context,
-	line    => $line,
-    };
+    unshift @{ $self->_context },
+      {
+        element => $element,
+        lang    => $lang,
+        ignore  => $ignore || $self->_is_ignored_context,
+        line    => $line,
+      };
 }
 
 sub _pop_context {
-    my ($self, $element, $line) = @_;
+    my ( $self, $element, $line ) = @_;
 
-    if ($self->_empty_elements->{$element}) {
-	return;
+    if ( $self->_empty_elements->{$element} ) {
+        return;
     }
 
     my $context = shift @{ $self->_context };
@@ -387,73 +401,83 @@ sub _pop_context {
 
 sub _start_document {
     my ($self) = @_;
-    $self->_context([]);
+    $self->_context( [] );
     $self->_errors(0);
 
 }
 
 sub _start_element {
-    my ($self, $tag, $attr, $line) = @_;
+    my ( $self, $tag, $attr, $line ) = @_;
 
-    $attr //= { };
+    $attr //= {};
 
-    my %classes = map { $_ => 1 } split /\s+/, ($attr->{class} // "");
+    my %classes = map { $_ => 1 } split /\s+/, ( $attr->{class} // "" );
 
-    my $state  =  $self->_is_ignored_context;
+    my $state = $self->_is_ignored_context;
 
     my $ignore = reduce {
-	no warnings 'once';
-	$a || $b;
-    } ($state, map { $classes{$_} // 0 } @{ $self->ignore_classes } );
+        no warnings 'once';
+        $a || $b;
+    }
+    ( $state, map { $classes{$_} // 0 } @{ $self->ignore_classes } );
 
     my $lang = $attr->{lang} // $self->_context_lang;
 
-    $self->_push_context($tag, $lang, $ignore, $line);
+    $self->_push_context( $tag, $lang, $ignore, $line );
 
     unless ($ignore) {
 
-	foreach my $name (@{ $self->check_attributes }) {
-	    $self->_text($attr->{$name}, $line) if (exists $attr->{$name});
-	}
+        foreach my $name ( @{ $self->check_attributes } ) {
+            $self->_text( $attr->{$name}, $line ) if ( exists $attr->{$name} );
+        }
     }
 }
 
 sub _end_element {
-    my ($self, $tag, $line) = @_;
+    my ( $self, $tag, $line ) = @_;
 
-    if (my $context = $self->_pop_context($tag, $line)) {
+    if ( my $context = $self->_pop_context( $tag, $line ) ) {
 
-	if ($tag ne $context->{element}) {
-	    $self->tester->croak(sprintf("Expected element '%s' near input line %d", $context->{element}, $line // 0));
-	}
+        if ( $tag ne $context->{element} ) {
+            $self->tester->croak(
+                sprintf(
+                    "Expected element '%s' near input line %d",
+                    $context->{element}, $line // 0
+                )
+            );
+        }
 
-	my $lang = $context->{lang};
+        my $lang = $context->{lang};
     }
 
 }
 
 sub _text {
-    my ($self, $text, $line) = @_;
+    my ( $self, $text, $line ) = @_;
 
-    unless ($self->_is_ignored_context) {
+    unless ( $self->_is_ignored_context ) {
 
-	my $speller  = $self->speller( $self->_context_lang );
-	my $encoding = $speller->get_option('encoding');
+        my $speller  = $self->speller( $self->_context_lang );
+        my $encoding = $speller->get_option('encoding');
 
-	my $iterator = $self->tokenizer->($text);
+        my $iterator = $self->tokenizer->($text);
 
-	while (my $u_word = $iterator->()) {
+        while ( my $u_word = $iterator->() ) {
 
-	    my $word  = encode($encoding, $u_word);
+            my $word = encode( $encoding, $u_word );
 
-	    my $check = $speller->check($word) || looks_like_number($word) || $word =~ /^\d+(?:[-'._]\d+)*/;
-	    unless ($check) {
+            my $check =
+                 $speller->check($word)
+              || looks_like_number($word)
+              || $word =~ /^\d+(?:[-'._]\d+)*/;
+            unless ($check) {
 
-	    	$self->_errors( 1 + $self->_errors );
-	    	$self->tester->diag("Unrecognized word: '${word}' at line ${line}");
-	    }
+                $self->_errors( 1 + $self->_errors );
+                $self->tester->diag(
+                    "Unrecognized word: '${word}' at line ${line}");
+            }
 
-	}
+        }
 
     }
 
@@ -471,20 +495,22 @@ spelling errors.
 =cut
 
 sub check_spelling {
-    my ($self, $text) = @_;
+    my ( $self, $text ) = @_;
 
     $self->_errors(0);
     $self->parser->parse($text);
     $self->parser->eof;
 
-    if ($self->_errors) {
-	$self->tester->diag(
-	    sprintf("Found %d spelling %s",
-		    $self->_errors,
-		    ($self->_errors == 1) ? "error" : "errors"));
+    if ( $self->_errors ) {
+        $self->tester->diag(
+            sprintf(
+                "Found %d spelling %s",
+                $self->_errors, ( $self->_errors == 1 ) ? "error" : "errors"
+            )
+        );
     }
 
-    return ($self->_errors == 0);
+    return ( $self->_errors == 0 );
 }
 
 =head2 spelling_ok
@@ -497,12 +523,12 @@ selected attributes.
 =cut
 
 sub spelling_ok {
-    my ($self, $text, $message) = @_;
+    my ( $self, $text, $message ) = @_;
 
-    $self->tester->ok($self->check_spelling($text), $message);
+    $self->tester->ok( $self->check_spelling($text), $message );
 }
 
- __PACKAGE__->meta->make_immutable;
+__PACKAGE__->meta->make_immutable;
 
 no Moose;
 
@@ -536,4 +562,4 @@ The following modules have similar functionality:
 
 use namespace::autoclean;
 
-1; # End of Test::HTML::Spelling
+1;    # End of Test::HTML::Spelling
