@@ -1,6 +1,4 @@
-=head1 NAME
-
-Test::HTML::Spelling - Test the spelling of HTML documents
+# ABSTRACT: spelling of HTML documents
 
 =begin readme
 
@@ -103,7 +101,7 @@ use Scalar::Util qw( looks_like_number );
 use Search::Tokenizer;
 use Text::Aspell;
 
-use version 0.77; our $VERSION = version->declare('v0.3.7');
+our $VERSION = 'v0.4.0';
 
 # A placeholder key for the default spellchecker
 

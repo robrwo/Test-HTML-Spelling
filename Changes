@@ -1,5 +1,6 @@
-Revision history for Test-HTML-Spelling
+Revision history for {{ $dist->name }}
 
+{{$NEXT}}
        - Fixed typo in POD (Shlomi Fish)
        - Convert the distribution to use Dist-Zilla as the build system
          instead of the undermaintained and unloved Module-Install.
