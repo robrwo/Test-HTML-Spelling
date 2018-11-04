@@ -1,6 +1,8 @@
 Revision history for {{ $dist->name }}
 
 {{$NEXT}}
+  [Other]
+  - Updated contributor metadata.
 
 v0.4.0    2018-11-04 15:06:57+00:00 Europe/London
   [Documentation]
