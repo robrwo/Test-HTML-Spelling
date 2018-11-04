@@ -150,6 +150,7 @@ your module.
 The following modules have similar functionality:
 
 - [Apache::AxKit::Language::SpellCheck](https://metacpan.org/pod/Apache::AxKit::Language::SpellCheck)
+- [HTML::Spelling::Site](https://metacpan.org/pod/HTML::Spelling::Site)
 
 # SOURCE
 

@@ -528,6 +528,8 @@ The following modules have similar functionality:
 
 =item L<Apache::AxKit::Language::SpellCheck>
 
+=item L<HTML::Spelling::Site>
+
 =back
 
 =cut

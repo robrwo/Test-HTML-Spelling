@@ -4,6 +4,8 @@ Revision history for {{ $dist->name }}
   [Documentation]
    - Fixed typo in POD (Shlomi Fish)
 
+   - Added to SEE ALSO section.
+
   [Toolchain]
   - Convert the distribution to use Dist-Zilla as the build system
     instead of the undermaintained and unloved Module-Install.
