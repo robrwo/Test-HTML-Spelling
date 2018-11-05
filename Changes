@@ -4,6 +4,9 @@ Revision history for {{ $dist->name }}
   [Enhancements]
    - Uses Moo instead of Moose
 
+  [Documentation]
+  - Removed outdated REQUIREMENTS section.
+
   [Other]
   - Updated contributor metadata.
 

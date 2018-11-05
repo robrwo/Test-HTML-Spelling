@@ -1,47 +1,5 @@
 # ABSTRACT: spelling of HTML documents
 
-=begin readme
-
-=head1 REQUIREMENTS
-
-This module requires Perl v5.10 or newer and the following non-core
-modules:
-
-=over
-
-=item L<Const::Fast>
-
-=item L<curry>
-
-=item L<HTML::Parser>
-
-=item L<Moose>
-
-=item L<MooseX::NonMoose>
-
-=item L<namespace::autoclean>
-
-=item L<Search::Tokenizer>
-
-=item L<Text::Aspell>
-
-=back
-
-The following modules are used for tests but are not needed to run
-this module:
-
-=over
-
-=item L<File::Slurp>
-
-=item L<Test::Builder>
-
-=item L<Test::Pod::Spelling>
-
-=back
-
-=end readme
-
 =head1 SYNOPSIS
 
   use Test::More;
