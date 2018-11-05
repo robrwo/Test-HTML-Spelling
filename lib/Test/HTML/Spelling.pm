@@ -84,9 +84,7 @@ package Test::HTML::Spelling;
 
 use v5.10;
 
-use Moose;
-use MooseX::NonMoose;
-
+use Moo;
 extends 'Test::Builder::Module';
 
 use utf8;
@@ -100,6 +98,9 @@ use List::Util qw( reduce );
 use Scalar::Util qw( looks_like_number );
 use Search::Tokenizer;
 use Text::Aspell;
+use Types::Standard -types;
+
+use namespace::autoclean;
 
 our $VERSION = 'v0.5.0';
 
@@ -124,7 +125,7 @@ It defaults to C<no-spellcheck>.
 
 has 'ignore_classes' => (
     is      => 'rw',
-    isa     => 'ArrayRef[Str]',
+    isa     => ArrayRef[Str],
     default => sub { [qw( no-spellcheck )] },
 );
 
@@ -139,13 +140,13 @@ It defaults to C<title> and C<alt>.
 
 has 'check_attributes' => (
     is      => 'rw',
-    isa     => 'ArrayRef[Str]',
+    isa     => ArrayRef[Str],
     default => sub { [qw( title alt )] },
 );
 
 has '_empty_elements' => (
     is      => 'rw',
-    isa     => 'HashRef',
+    isa     => HashRef[Bool],
     default => sub {
         return {
             map { $_ => 1 } (
@@ -171,7 +172,7 @@ e.g.
 
 has 'ignore_words' => (
     is      => 'rw',
-    isa     => 'HashRef',
+    isa     => HashRef,
     default => sub { {} },
 );
 
@@ -228,7 +229,7 @@ has 'parser' => (
 
 has '_spellers' => (
     is      => 'ro',
-    isa     => 'HashRef',
+    isa     => HashRef,
     lazy    => 1,
     default => sub {
         my $speller = Text::Aspell->new();
@@ -332,13 +333,13 @@ sub langs {
 
 has '_errors' => (
     is      => 'rw',
-    isa     => 'Int',
+    isa     => Int,
     default => 0,
 );
 
 has '_context' => (
     is      => 'rw',
-    isa     => 'ArrayRef[HashRef]',
+    isa     => ArrayRef[HashRef],
     default => sub { [] },
 );
 
@@ -528,10 +529,6 @@ sub spelling_ok {
     $self->tester->ok( $self->check_spelling($text), $message );
 }
 
-__PACKAGE__->meta->make_immutable;
-
-no Moose;
-
 =head1 KNOWN ISSUES
 
 =head2 Using Test::HTML::Spelling in a module
@@ -559,7 +556,5 @@ The following modules have similar functionality:
 =back
 
 =cut
-
-use namespace::autoclean;
 
 1;    # End of Test::HTML::Spelling

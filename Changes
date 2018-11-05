@@ -1,6 +1,9 @@
 Revision history for {{ $dist->name }}
 
 {{$NEXT}}
+  [Enhancements]
+   - Uses Moo instead of Moose
+
   [Other]
   - Updated contributor metadata.
 
