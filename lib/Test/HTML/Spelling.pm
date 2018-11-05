@@ -101,7 +101,7 @@ use Scalar::Util qw( looks_like_number );
 use Search::Tokenizer;
 use Text::Aspell;
 
-our $VERSION = 'v0.4.1';
+our $VERSION = 'v0.5.0';
 
 # A placeholder key for the default spellchecker
 
