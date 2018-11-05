@@ -60,7 +60,7 @@ use Types::Standard -types;
 
 use namespace::autoclean;
 
-our $VERSION = 'v0.5.0';
+our $VERSION = 'v0.5.1';
 
 # A placeholder key for the default spellchecker
 
